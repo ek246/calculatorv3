@@ -1,8 +1,9 @@
 
 import pytest
-from typing import Union
 from app.operations import Operations
+from typing import Union
 Digit = Union[float, int]
+
 
 @pytest.mark.parametrize(
     "a, b, expected",

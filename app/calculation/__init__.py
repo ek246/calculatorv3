@@ -26,9 +26,9 @@ class CalculationFactory:
    @classmethod
    def register_calculation(cls, calc_type: str):
        def decorator(calc_class: type) -> type:
-           calc_type = calc_type.lower()
+           calc_type_lower = calc_type.lower()
            if calc_type in cls.calc_dict:
-               raise ValueError(f"'{calc_type}' already exists")
+               raise ValueError(f"'{calc_type_lower}' already exists")
        
            cls.calc_dict[calc_type] = calc_class
            return calc_class
@@ -40,22 +40,22 @@ class CalculationFactory:
            raise ValueError(f"'{calc_type}' is unknown. The known types are: {', '.join(cls.calc_dict.keys())}")
        return cls.calc_dict[calc_type](a, b)
 
-@CalculationFactory.register_calculation("add")
+@CalculationFactory.register_calculation("addition")
 class Add(Calculation):
     def execute(self) -> float:
          return Operations.addition(self.a, self.b )
 
-@CalculationFactory.register_calculation("subtract")
+@CalculationFactory.register_calculation("subtraction")
 class Subtract(Calculation):
     def execute(self) -> float:
         return Operations.subtraction(self.a, self.b)
 
-@CalculationFactory.register_calculation("multiply")
+@CalculationFactory.register_calculation("multiplication")
 class Multiply(Calculation):
     def execute(self) -> float:
         return Operations.multiplication(self.a, self.b)
 
-@CalculationFactory.register_calculation("divide")
+@CalculationFactory.register_calculation("division")
 class Divide(Calculation):
     def execute(self) -> float:
         if self.b == 0:
